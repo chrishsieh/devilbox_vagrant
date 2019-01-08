@@ -80,6 +80,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :shell, :inline => latest_docker_install_script
   config.vm.provision :shell, :inline => install_devilbox_script
-  config.vm.provision :shell, :inline => fix_dns_use_ipv6
+  config.vm.provision :shell, :inline => fix_dns_use_ipv6, run: "always"
   config.vm.provision :shell, :inline => set_environment_variables, run: "always"
 end
