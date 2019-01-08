@@ -6,7 +6,7 @@
 ## Vagrant version
 Vagrant.require_version ">= 1.7.4"
 
-$forwarded_ports = {80 => 80, 443 => 443}
+$forwarded_ports = {80 => 80, 443 => 443, 53 => 53}
 
 set_environment_variables = <<SCRIPT
     tee "/etc/profile.d/myvars.sh" > "/dev/null" <<EOF
@@ -41,6 +41,7 @@ install_devilbox_script = <<SCRIPT
 SCRIPT
 
 fix_dns_use_ipv6 = <<SCRIPT
+    sed -i "/1/i nameserver 127.0.0.1" /etc/resolv.conf
     sed -i "s/^nameserver 8.8.8.8$/#nameserver 8.8.8.8/g" /etc/resolv.conf
     sed -i "s/^nameserver 8.8.4.4$/#nameserver 8.8.4.4/g" /etc/resolv.conf
 SCRIPT
